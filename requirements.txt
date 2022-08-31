@@ -9,6 +9,7 @@ django-restframework==0.0.1
 djangorestframework==3.13.1
 executing==1.0.0
 Flask==2.2.2
+gunicorn==20.1.0
 ipdb==0.13.9
 ipython==8.4.0
 itsdangerous==2.1.2

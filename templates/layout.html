@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
@@ -9,6 +10,11 @@
       rel="stylesheet"
       integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
       crossorigin="anonymous"
+    />
+    <link
+      rel="shortcut icon"
+      href="{% static 'favicon.ico' %}"
+      type="image/x-icon"
     />
     <title>You Tube Downloader</title>
     <style>
@@ -49,6 +55,11 @@
           stroke-dashoffset: -125px;
         }
       }
+      @media (max-width: 400px) {
+        :root {
+          font-size: 12px !important;
+        }
+      }
     </style>
   </head>
   <body class="h-100 d-flex flex-column">
@@ -63,7 +74,7 @@
           <span class="fs-4">YouTube Downloader</span>
         </a>
 
-        <ul class="nav nav-pills justify-content-sm-center">
+        <ul class="nav nav-pills justify-content-center">
           <li class="nav-item">
             <a href="/video" class="nav-link">Baixar vídeo</a>
           </li>
@@ -81,13 +92,15 @@
         </ul>
       </header>
     </div>
-    <main class="h-80 flex-grow-1 d-flex flex-column align-content-center">{% block main %}{% endblock %}</main>
+    <main class="h-80 flex-grow-1 d-flex flex-column align-content-center">
+      {% block main %}{% endblock %}
+    </main>
 
-    <div class="container">
+    <div class="container border-top">
       <footer
-        class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4 border-top"
+        class="d-flex align-items-center flex-wrap justify-content-center align-items-center py-3 my-3"
       >
-        <span class="mb-3 mb-md-0 text-muted text-center"
+        <span class="mb-md-0 text-muted text-center"
           >&copy; 2022 Criado Por
           <a href="https://github.com/gabrielrochasouza" target="_blank"
             >Gabriel Rocha</a

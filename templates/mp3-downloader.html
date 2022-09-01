@@ -4,7 +4,8 @@
 
       <div class="px-4 py-5 my-5 text-center">
         <h1 class="display-5 fw-bold">Baixe Vídeos no Youtube em MP3!</h1>
-        <form method="POST" class="col-lg-6 mx-auto">
+        <form method="GET" class="col-lg-6 mx-auto">
+          {% csrf_token %}
           <p class="lead mb-4 mt-4">
             <input
               type="text"
@@ -16,8 +17,13 @@
             />
           </p>
           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="submit" id="submitBtn" class="btn btn-primary btn-lg px-4">
-              Baixar MP3
+            <button type="submit" disabled id="submitBtn" class="btn btn-primary btn-lg px-4">
+              <svg viewBox="25 25 50 50" id="loading-circle" class="d-none">
+                <circle r="20" cy="50" cx="50"></circle>
+              </svg>
+              <span>
+                Baixar MP3
+              </span>
             </button>
           </div>
         </form>
@@ -33,4 +39,19 @@
           }
         })
       </script>
+
+      <script>
+        document.getElementById("floatingInput").addEventListener("input",(e)=>{
+          if(e.target.value.slice(0,32)==="https://www.youtube.com/watch?v="){
+            document.getElementById("submitBtn").removeAttribute("disabled")
+          } else{
+            document.getElementById("submitBtn").setAttribute("disabled", "true")
+          }
+        })
+        document.getElementById("submitBtn").addEventListener("click", ()=>{
+            document.getElementById("loading-circle").classList.remove("d-none")
+            setTimeout(() =>document.getElementById("submitBtn").setAttribute("disabled", "true"), 200);
+        })
+      </script>
+
 {% endblock %}

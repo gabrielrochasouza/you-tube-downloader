@@ -7,11 +7,10 @@
       <h1 class="display-4 fw-bold lh-1">Escolha a Resolução do Vídeo</h1>
       <p class="lead">{{title}}</p>
 
-      <form
+      <div
         class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3"
         style="max-width: 490px"
-        action="downloaded/"
-        method="post"
+
       >
         {% csrf_token %}
         <input type="hidden" name="url" value="{{url}}" />
@@ -20,20 +19,21 @@
           type="button"
           style="min-height: 48px; min-width: 200px"
           class="w-80 border-1 bg-light rounded-3 px-4 me-md-2 pl-4"
-          id="floatingInput"
+          id="select"
         >
           {%for stream in streams%}
-          <option value="{{stream.itag}}">{{stream.resolution}} - {{stream.megabytes}}Mb</option>
+          <option value="{{stream.url}}">{{stream.resolution}} - {{stream.megabytes}}Mb</option>
           {%endfor%}
         </select>
-
-        <button type="submit" id="download" class="btn btn-primary btn-lg px-4">
-          <svg viewBox="25 25 50 50" id="loading-circle" class="d-none">
-            <circle r="20" cy="50" cx="50"></circle>
-          </svg>
-          <span> Baixar </span>
-        </button>
-    </form>
+        <a href="#" target="_blank"  id="download_link">
+          <button type="submit" id="download" class="btn btn-primary btn-lg px-4">
+            <svg viewBox="25 25 50 50" id="loading-circle" class="d-none">
+              <circle r="20" cy="50" cx="50"></circle>
+            </svg>
+            <span> Baixar </span>
+          </button>
+        </a>
+    </div>
     <small id="wait" class="d-none">Espere um momento, em breve uma janela será aberta, por ela faça o download...</small>
 </div>
     <div
@@ -51,10 +51,17 @@
   </div>
 </div>
 <script>
+  document.getElementById("download_link").href = document.getElementById("select").value
     document.getElementById("download").addEventListener("click", ()=>{
         document.getElementById("loading-circle").classList.remove("d-none")
         document.getElementById("wait").classList.remove("d-none")
         setTimeout(() => document.getElementById("download").setAttribute("disabled", "true"), 200);
+        window.location.replace("downloaded/")
     })
+    document.getElementById("select").addEventListener("input",(e)=>{
+      const url = e.target.value
+      document.getElementById("download_link").href = url
+    })
+
 </script>
 {% endblock %}

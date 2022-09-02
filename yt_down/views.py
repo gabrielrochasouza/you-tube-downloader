@@ -1,22 +1,48 @@
 from django.shortcuts import render
 import pytube
-
-# Create your views here.
+import youtube_dl
+import os
 
 def main_page(request):
     return render(request,"main.html")
 
-
 def download_video_page(request):
     return render(request, "video-downloader.html")
 
-
 def download_mp3_page(request):
-    return render(request, "mp3-downloader.html")
+    try: 
+        return render(request, "mp3-downloader.html")
+    except Exception:
+        return render(request, "error.html")
+
+
+def mp3_ready_to_download(request):
+    try: 
+        url = request.GET.get("url")
+        options = {
+            "format": "bestaudio/best",
+            "keepvideo": False,
+            "outtmpl": "audio.mp3",
+            "path":"/static/"
+            
+        }
+        video_info = youtube_dl.YoutubeDL().extract_info(
+            url = url, download=False
+        )
+        with youtube_dl.YoutubeDL(options) as ydl:
+            ydl.download([video_info['webpage_url']])
+
+        os.system("mv audio.mp3 static/")
+        return render(request, "mp3-ready-to-download.html",{
+            "title":video_info['title'], 
+            "description": video_info["description"]
+        })
+    except Exception:
+        return render(request, "error.html")
 
 
 def video_downloaded(request):
-    try: 
+    try:
         return render(request, "downloaded-file.html")
     except Exception:
         return render(request, "error.html")

@@ -25,7 +25,7 @@
           <option value="{{stream.url}}">{{stream.resolution}} - {{stream.megabytes}}Mb</option>
           {%endfor%}
         </select>
-          <button type="submit" id="download" class="btn w-100 btn-primary btn-lg px-4">
+          <button type="submit" id="download" class="btn btn-primary btn-lg px-4">
             <svg viewBox="25 25 50 50" id="loading-circle" class="d-none">
               <circle r="20" cy="50" cx="50"></circle>
             </svg>
@@ -50,11 +50,14 @@
 </div>
 <script>
     document.getElementById("download").addEventListener("click", ()=>{
-        document.getElementById("loading-circle").classList.remove("d-none")
-        document.getElementById("wait").classList.remove("d-none")
-        setTimeout(() => document.getElementById("download").setAttribute("disabled", "true"), 200);
-        window.location.replace("downloaded/")
-        window.open(document.getElementById("select").value)
+        if(window.innerWidth>740){
+          window.location.replace("downloaded/")
+          window.open(document.getElementById("select").value)
+
+        }else{
+          document.getElementById("wait").classList.remove("d-none")
+          window.location.assign(document.getElementById("select").value)
+        }
     })
 </script>
 {% endblock %}

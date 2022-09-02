@@ -1,0 +1,31 @@
+{% extends 'layout.html' %} {% block main %}
+<div class="container my-5">
+  <div
+    class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg"
+  >
+    <div class="">
+      <h1 class="display-4 fw-bold lh-1">{{title}}</h1>
+      <p class="lead">{{description}}</p>
+
+      <div
+        class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3"
+        style="max-width: 490px"
+      >
+        <a href="http://localhost:8000/static/audio.mp3" download="http://localhost:8000/static/audio.mp3">
+          <button
+            type="submit"
+            id="download"
+            class="btn w-100 btn-primary btn-lg px-4"
+          >
+            <svg viewBox="25 25 50 50" id="loading-circle" class="d-none">
+              <circle r="20" cy="50" cx="50"></circle>
+            </svg>
+            <span> Baixar </span>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

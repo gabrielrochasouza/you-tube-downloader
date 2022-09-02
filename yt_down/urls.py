@@ -7,4 +7,5 @@ urlpatterns = [
     path("video/download/", views.download_video),
     path("video/download/downloaded/", views.video_downloaded),
     path("mp3/", views.download_mp3_page),
+    path("mp3/download-mp3/", views.mp3_ready_to_download),
 ]

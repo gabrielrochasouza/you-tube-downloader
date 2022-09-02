@@ -30,12 +30,17 @@ def mp3_ready_to_download(request):
             url = url, download=False
         )
         with youtube_dl.YoutubeDL(options) as ydl:
-            ydl.download([video_info['webpage_url']])
+            video_info = ydl.extract_info(
+                url=url, download=False
+            )
+            thumbnail = video_info['thumbnail']
+            url_to_download = video_info['url']
 
-        os.system("mv audio.mp3 static/")
         return render(request, "mp3-ready-to-download.html",{
             "title":video_info['title'], 
-            "description": video_info["description"]
+            "description": video_info["description"],
+            "thumbnail":thumbnail,
+            "url_to_download":url_to_download
         })
     except Exception:
         return render(request, "error.html")

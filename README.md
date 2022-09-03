@@ -55,7 +55,7 @@ pip install -r requirements.txt --upgrade pip
 python manage.py runserver
 ## (To start server at port 8000)
 
-## After that access this url your browser: http://localhost:8000/
+## After that access this url in your browser: http://localhost:8000/
 ```
 
 One line command:

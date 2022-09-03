@@ -36,3 +36,29 @@ In this application you can see the size of the file you will download, and choo
 - Jninja
 
 
+## Commands to start the project locally
+
+First you need to add a .env file in root, take a look at .env.example to see the variables you should set, it is a SECRET_KEY, you can define its value, since you are using in your local repository.
+
+After this step is done, follow the commands bellow.
+
+```
+python -m venv venv 
+## (To create a venv a virtual environment so you can install the dependencies of this project)
+
+source venv/bin/activate 
+## (To activate the virtual environment)
+
+pip install -r requirements.txt --upgrade pip
+## (To install all dependencies of this project)
+
+python manage.py runserver
+## (To start server at port 8000)
+
+## After that access this url your browser: http://localhost:8000/
+```
+
+One line command:
+```
+python -m venv venv && source venv/bin/activate && pip install -r requirements.txt --upgrade pip && python manage.py runserver
+```

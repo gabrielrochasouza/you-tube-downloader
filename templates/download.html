@@ -50,14 +50,8 @@
 </div>
 <script>
     document.getElementById("download").addEventListener("click", ()=>{
-        if(window.innerWidth>740){
-          window.location.replace("downloaded/")
-          window.open(document.getElementById("select").value)
-
-        }else{
-          document.getElementById("wait").classList.remove("d-none")
-          window.location.assign(document.getElementById("select").value)
-        }
+      document.getElementById("wait").classList.remove("d-none")
+      window.location.assign(document.getElementById("select").value)
     })
 </script>
 {% endblock %}
